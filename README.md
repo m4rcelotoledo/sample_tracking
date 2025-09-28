@@ -9,10 +9,11 @@ It is just a simple website, that running in Sinatra application and consists of
 ## Technical Informations and dependencies
 
 ```code
-- Docker            - version 19.03.5-ce
-- Docker Compose    - version 1.25.1
-- The Ruby language - version 2.7.0
-- Sinatra           - version 2.0.8
+- Docker            - version 20.10+
+- Docker Compose    - version 2.0+
+- The Ruby language - version 2.7.5
+- Sinatra           - version 2.2+
+- Puma              - version 5.6+
 ```
 
 ## To use with Docker
@@ -34,6 +35,27 @@ script/server
 ```
 
 To see the application in action, open a browser window and navigate to <http://localhost:4567>.
+
+## Development
+
+### Local Development (without Docker)
+
+1. Install Ruby 2.7.5 using asdf
+2. Install dependencies:
+   ```bash
+   bundle install
+   ```
+3. Run the application:
+   ```bash
+   bundle exec rackup
+   ```
+
+### Environment Variables
+
+The application can be configured using environment variables:
+
+- `PORT`: Port to run the application (default: 4567)
+- `HOST`: Host to bind the application (default: 0.0.0.0)
 
 #### Template Credits
 
