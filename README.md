@@ -1,65 +1,159 @@
-# README
+# Sample Tracking
 
-## About this project
+## Sobre o Projeto
 
-This project is the Front-end and should be work together with [ContactList](https://github.com/marcelotoledo5000/ContactList).
+Este projeto é o Front-end que funciona em conjunto com [ContactList](https://github.com/m4rcelotoledo/ContactList).
 
-It is just a simple website, that running in Sinatra application and consists of used to navigate and to create a new contact via POST, using the REST API. Generating Data Tracking and sending some information to another project (ContactList).
+É uma aplicação web simples construída com Sinatra que permite navegar e criar novos contatos via POST, utilizando uma API REST. Gera dados de tracking e envia informações para outro projeto (ContactList).
 
-## Technical Informations and dependencies
+## Informações Técnicas e Dependências
 
 ```code
-- Docker            - version 20.10+
-- Docker Compose    - version 2.0+
-- The Ruby language - version 2.7.5
-- Sinatra           - version 2.2+
-- Puma              - version 5.6+
+- Docker            - versão 20.10+
+- Docker Compose    - versão 2.0+
+- Ruby              - versão 3.4.6
+- Sinatra           - versão 3.2+
+- Puma              - versão 7.0+
+- RuboCop           - versão 1.81+ (desenvolvimento)
 ```
 
-## To use with Docker
+## Funcionalidades
 
-Clone the project and prepare to use:
+- ✅ **Ruby 3.4.6** - Versão mais recente do Ruby com melhorias de performance
+- ✅ **Sinatra 3.2** - Framework web moderno e leve
+- ✅ **Puma 7.0** - Servidor web de alta performance
+- ✅ **Configuração por Ambiente** - Configuração flexível via variáveis de ambiente
+- ✅ **JavaScript Moderno** - Vanilla JS com recursos ES6+, sem dependência do jQuery
+- ✅ **Health Check** - Endpoint `/health` para monitoramento
+- ✅ **Design Responsivo** - Interface amigável para dispositivos móveis
+- ✅ **Formulário de Contato** - Submissão de contatos integrada com tracking
+- ✅ **User Tracking** - Rastreamento automático de visitas com persistência de GUID
+- ✅ **Dockerização** - Containerização completa com Docker e Docker Compose
+- ✅ **Makefile** - Automação de build e deploy com comandos simples
 
-```Shell
-git clone git@github.com:marcelotoledo5000/sample_tracking.git
+## Variáveis de Ambiente
+
+A aplicação pode ser configurada usando variáveis de ambiente:
+
+- `PORT`: Porta para executar a aplicação (padrão: 4567)
+- `HOST`: Host para vincular a aplicação (padrão: 0.0.0.0)
+- `RACK_ENV`: Modo do ambiente (padrão: development)
+- `CONTACT_API_URL`: URL da API de submissão de contatos (padrão: http://localhost:3000/contacts)
+- `TRACKING_API_URL`: URL da API de tracking (padrão: http://localhost:3000/tracks)
+- `APP_NAME`: Nome da aplicação (padrão: Sample Tracking)
+- `APP_VERSION`: Versão da aplicação (padrão: 1.0.0)
+
+## Uso com Docker
+
+Clone o projeto e prepare para usar:
+
+```bash
+git clone git@github.com:m4rcelotoledo/sample_tracking.git
 cd sample_tracking
-script/setup
 ```
 
-### To run app
+### Executar a Aplicação
 
-To check that application runs properly by entering the command:
+Para verificar se a aplicação executa corretamente:
 
-```Shell
-script/server
+```bash
+# Usando Makefile (recomendado)
+make up
+
+# Ou usando Docker Compose diretamente
+docker-compose up --build
 ```
 
-To see the application in action, open a browser window and navigate to <http://localhost:4567>.
+Para ver a aplicação em ação, abra uma janela do navegador e navegue para <http://localhost:4567>.
 
-## Development
+### Health Check
 
-### Local Development (without Docker)
+Verifique a saúde da aplicação em: <http://localhost:4567/health>
 
-1. Install Ruby 2.7.5 using asdf
-2. Install dependencies:
+## Desenvolvimento
+
+### Desenvolvimento Local (sem Docker)
+
+1. Instale Ruby 3.4.6 usando asdf ou rbenv
+2. Instale as dependências:
    ```bash
    bundle install
    ```
-3. Run the application:
+3. Execute a aplicação:
    ```bash
-   bundle exec rackup
+   bundle exec ruby app.rb
    ```
 
-### Environment Variables
+### Configuração do Ambiente
 
-The application can be configured using environment variables:
+1. Copie o arquivo de exemplo de ambiente:
+   ```bash
+   cp env.example .env
+   ```
+2. Edite `.env` com seus valores de configuração
+3. Execute a aplicação
 
-- `PORT`: Port to run the application (default: 4567)
-- `HOST`: Host to bind the application (default: 0.0.0.0)
+### Comandos Makefile
 
-#### Template Credits
+O projeto inclui um Makefile com comandos úteis:
 
-Used template HTML from html5up.net | @ajlkn
+```bash
+make help          # Mostra todos os comandos disponíveis
+make build         # Constrói a imagem Docker
+make up            # Sobe a aplicação
+make down          # Para a aplicação
+make logs          # Mostra os logs
+make health        # Verifica a saúde da aplicação
+make clean         # Limpa containers e imagens
+make dev           # Modo desenvolvimento
+make prod          # Modo produção
+make test          # Executa testes
+make status        # Status dos containers
+make restart       # Reinicia a aplicação
+make stop          # Para a aplicação
+make deploy        # Deploy da aplicação
+```
 
--   Template: Dimension by HTML5 UP
--   [Credits.txt](Credits.txt)
+## Estrutura do Projeto
+
+```
+sample_tracking/
+├── app.rb                 # Aplicação principal Sinatra
+├── config.ru             # Configuração Rack
+├── config/
+│   └── puma.rb           # Configuração do Puma
+├── Dockerfile            # Imagem Docker
+├── docker-compose.yml    # Configuração Docker Compose
+├── Makefile              # Comandos de automação
+├── Gemfile               # Dependências Ruby
+├── Gemfile.lock          # Versões fixas das dependências
+├── env.example           # Exemplo de variáveis de ambiente
+├── .gitignore            # Arquivos ignorados pelo Git
+├── .dockerignore         # Arquivos ignorados pelo Docker
+├── public/               # Arquivos estáticos
+│   ├── assets/
+│   │   ├── css/          # Estilos CSS
+│   │   ├── js/           # JavaScript moderno
+│   │   └── fonts/        # Fontes
+│   └── images/           # Imagens
+└── views/
+    └── index.html        # Template principal
+```
+
+## Melhorias Implementadas
+
+- **Upgrade do Ruby**: 2.7.0 → 3.4.6
+- **Substituição do WEBrick**: Por Puma 7.0 para melhor performance
+- **JavaScript Moderno**: Removida dependência do jQuery, implementado Vanilla JS
+- **Dockerização**: Containerização completa com Alpine Linux
+- **Automação**: Substituição de scripts por Makefile moderno
+- **Configuração**: Sistema de variáveis de ambiente
+- **Monitoramento**: Endpoint de health check
+- **Qualidade de Código**: Integração do RuboCop
+
+## Créditos do Template
+
+Template HTML usado de html5up.net | @ajlkn
+
+- Template: Dimension by HTML5 UP
+- [Credits.txt](Credits.txt)
