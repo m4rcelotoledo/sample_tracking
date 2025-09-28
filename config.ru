@@ -1,5 +1,9 @@
 # frozen_string_literal: true
 
-require './app.rb'
+# config.ru for Sample Tracking
+# Rack configuration file
 
+require_relative 'app'
+
+# Run the application
 run App
