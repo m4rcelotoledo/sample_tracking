@@ -85,46 +85,6 @@
 									</ul>
 								</form>
 
-								<!--  Send data to create Contact on Rails Application -->
-								<script>
-									window.addEventListener("load", function () {
-										function sendContact() {
-											let guid = getOrCreateGuid();
-											let XHR = new XMLHttpRequest();
-
-											// Bind the FormData object and the form element
-											let formData = new FormData(form);
-											formData.append('guid', guid);
-
-											// Define what happens on successful data submission
-											XHR.addEventListener("load", function(event) {
-												alert(event.target.status + ': ' + event.target.statusText);
-											});
-
-											// Define what happens in case of error
-											XHR.addEventListener("error", function(event) {
-												alert('Oops! Something went wrong.');
-											});
-
-											// Set up our request
-											XHR.open("POST", "http://localhost:3000/contacts");
-
-											// The data sent is what the user provided in the form
-											XHR.send(formData);
-										}
-
-										// Access the form element...
-										var form = document.querySelector("form");
-
-										// ...and take over its submit event.
-										form.addEventListener("submit", function (event) {
-											event.preventDefault();
-
-											sendContact();
-										});
-									});
-								</script>
-
 								<ul class="icons">
 									<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
 									<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
@@ -146,20 +106,12 @@
 			<div id="bg"></div>
 
 		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
 			<script src="assets/js/browser.min.js"></script>
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
-			<script src="assets/js/libTracking.js"></script>
-
-			<script>
-				const handler = event => {
-					sendTracking();
-				}
-				window.addEventListener('hashchange', handler)
-				window.addEventListener('load', handler)
-			</script>
+			<!-- Modern JavaScript replaces jQuery and old tracking -->
+			<script src="assets/js/modern-tracking.js"></script>
 
 	</body>
 </html>
