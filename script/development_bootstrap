@@ -10,6 +10,6 @@ echo "Installing gems"
 bundle check || bundle install
 
 echo "Setting up permissions"
-chown -R $USER:$USER .
+chown -R ${USER:-$(whoami)}:${USER:-$(whoami)} .
 
 echo "Development environment ready!"
