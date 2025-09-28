@@ -1,17 +1,14 @@
-# Docker Compose configuration for Sample Tracking
-# Updated for Ruby 2.7.5 compatibility
-
+# Simple Docker Compose for Sample Tracking
 services:
-  server:
-    image: ruby:2.7.5-slim
+  app:
+    build: .
     container_name: sample_tracking
     ports:
       - "4567:4567"
     environment:
-      - BUNDLE_PATH=vendor/bundle
-      - BUNDLE_DISABLE_SHARED_GEMS=1
-      - BUNDLE_WITHOUT=development:test
+      - RACK_ENV=development
+      - PORT=4567
+      - HOST=0.0.0.0
     volumes:
-      - .:/var/www/sample_tracking:Z
-    working_dir: /var/www/sample_tracking
-    command: sh -c "apt-get update && apt-get install -y build-essential make && bundle install && bundle exec rackup --host 0.0.0.0 -p 4567"
+      - .:/app
+    working_dir: /app
