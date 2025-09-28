@@ -1,8 +1,15 @@
 #!/bin/bash
 
+echo "Installing system dependencies"
+apk add --no-cache build-base
+
 echo "Installing bundler"
 gem install bundler
 
 echo "Installing gems"
 bundle check || bundle install
+
+echo "Setting up permissions"
 chown -R $USER:$USER .
+
+echo "Development environment ready!"
