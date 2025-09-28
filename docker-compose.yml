@@ -1,18 +1,17 @@
-# https://github.com/marcelotoledo5000/Dockerfiles
-# https://hub.docker.com/repository/docker/skygvinn/alpine-ruby2.7.0-nodejs
-
-version: '3.6'
+# Docker Compose configuration for Sample Tracking
+# Updated for Ruby 2.7.5 compatibility
 
 services:
   server:
-    image: skygvinn/alpine-ruby2.7.0-nodejs:v1.0
+    image: ruby:2.7.5-slim
     container_name: sample_tracking
     ports:
       - "4567:4567"
     environment:
       - BUNDLE_PATH=vendor/bundle
       - BUNDLE_DISABLE_SHARED_GEMS=1
+      - BUNDLE_WITHOUT=development:test
     volumes:
       - .:/var/www/sample_tracking:Z
     working_dir: /var/www/sample_tracking
-    command: bundle exec rackup --host 0.0.0.0 -p 4567
+    command: sh -c "apt-get update && apt-get install -y build-essential make && bundle install && bundle exec rackup --host 0.0.0.0 -p 4567"
