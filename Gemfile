@@ -5,7 +5,7 @@ source 'https://rubygems.org'
 ruby '3.4.6'
 
 # Web framework
-gem 'sinatra', '~> 3.1'
+gem 'sinatra', '~> 4.2'
 
 # Web server
 gem 'puma'
